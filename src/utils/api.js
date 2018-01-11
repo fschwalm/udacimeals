@@ -1,3 +1,4 @@
+import fallback from './fallback.json';
 const API_ID = process.env.REACT_APP_API_ID;
 const APP_KEY = process.env.REACT_APP_APP_KEY;
 
@@ -9,5 +10,6 @@ export function fetchRecipes(food = "") {
     }`
   )
     .then(res => res.json())
-    .then(({ hits }) => hits.map(({ recipe }) => recipe));
+    .then(({ hits }) => hits.map(({ recipe }) => recipe))
+    .catch(res => fallback.hits.map(({ recipe }) => recipe));
 }
